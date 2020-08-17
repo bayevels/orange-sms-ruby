@@ -33,6 +33,11 @@ module OrangeSms
       JSON.parse(response.body).fetch('access_token', nil)
     end
 
+    # Ask Orange backend to send test message to the sender_phone defined in the /config/initializer/orange_sms.rb
+    def send_test_sms
+      send_sms(OrangeSms.sender_phone, "Yes ! it's working")
+    end
+
     # Ask Orange backend to send Sms to some number
     def send_sms(receiver_phone, message)
       response = send_request("/smsmessaging/v1/outbound/tel%3A%2B#{OrangeSms.sender_phone}/requests",
