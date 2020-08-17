@@ -1,0 +1,8 @@
+  
+Description:
+  Generates the necessary files to get you up and running with OrangeSms gem
+
+Examples:
+  rails generate orange_sms:install
+
+    This will generate the initializer file
