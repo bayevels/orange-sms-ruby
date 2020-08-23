@@ -6,9 +6,9 @@ OrangeSms.setup do |config|
   # Sender Phone
   config.sender_phone = 'put your phone number here'
 
-  # Sender country code. Follow ISO-3166 alpha 3 country codes.
+  # Sender country code. Follow ISO-3166 alpha 3 country codes. Default country value is :sen (Senegal)
   # You can find supported countries by Orange Api in the folllowing link https://developer.orange.com/apis/sms-sn/getting-started
-  config.sender_country_code = :sen
+  # config.sender_country_code = :sen
 
   # SenderEmail
   config.sender_email = 'your-email@here.com'

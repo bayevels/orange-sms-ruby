@@ -1,4 +1,8 @@
-require "orange_sms/version"
+# frozen_string_literal: true
+
+require 'orange_sms/version'
+require 'active_support/core_ext/module/attribute_accessors'
+
 module OrangeSms
   mattr_accessor :sender_name
   @@sender_name = nil
