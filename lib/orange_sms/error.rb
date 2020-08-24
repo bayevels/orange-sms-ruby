@@ -28,7 +28,7 @@ module OrangeSms
     end
 
     class ApiError < StandardError
-      attr_reader :message, :response, :status, :error_message
+      attr_reader :code, :message, :response, :status, :error_message, :description
 
       def initialize(message, response)
         @status = response.status

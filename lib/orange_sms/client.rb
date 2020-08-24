@@ -1,3 +1,5 @@
+require 'faraday'
+
 module OrangeSms
   # Orange Api Client used to send http request to the Orange Backend
   class Client
@@ -19,15 +21,18 @@ module OrangeSms
     }.freeze
 
     def initialize(country_code = nil)
-      @country_code = country_code.nil? ? OrangeSms.default_receiver_country : country_code
+      @country_code = country_code.nil? ? OrangeSms.default_receiver_country_code : country_code
       @country = SUPPORTED_COUNTRIES[@country_code]
-      @sender_country = SUPPORTED_COUNTRIES[OrangeSms.sender_phone_code]
+      @sender_country = SUPPORTED_COUNTRIES[OrangeSms.sender_country_code]
       @sender_phone = @sender_country[:prefix] + OrangeSms.sender_phone
     end
 
     # Fetch the access token directly from your code
     def fetch_access_token
-      response = send_request('/oauth/v2/token', 'grant_type=client_credentials'.to_str, OrangeSms.authorization, 'application/x-www-form-urlencoded')
+      response = send_request('/oauth/v2/token',
+                              'grant_type=client_credentials',
+                              OrangeSms.authorization,
+                              'application/x-www-form-urlencoded')
       raise OrangeSms::Error::AuthenticationError.new('Unable to fetch access token', response) if response.status != 200
 
       JSON.parse(response.body).fetch('access_token', nil)
