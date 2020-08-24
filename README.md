@@ -1,8 +1,10 @@
 # OrangeSms
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/orange_sms`. To experiment with that code, run `bin/console` for an interactive prompt.
+> Orange Sms Ruby is a client library that allow you to send sms from a RoR app using the [Orange Sms API](https://developer.orange.com/apis/sms-sn/overview)
 
-TODO: Delete this and the text above, and describe your gem
+## Disclaimer
+
+## Motivation
 
 ## Installation
 
@@ -20,7 +22,7 @@ Or install it yourself as:
 
     $ gem install orange_sms
 
-## Usage
+## Usage 
 
 TODO: Write usage instructions here
 

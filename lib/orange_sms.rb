@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 require 'orange_sms/version'
+require 'orange_sms/client'
+require 'orange_sms/error'
 require 'active_support/core_ext/module/attribute_accessors'
 
 module OrangeSms
