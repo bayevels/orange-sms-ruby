@@ -12,3 +12,5 @@ deploy:
   verbose: true
   on:
     branch: master
+script:
+  - rake test

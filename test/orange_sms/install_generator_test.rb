@@ -6,7 +6,7 @@ require 'generators/install_generator'
 module OrangeSms
   class InstallGeneratorTest < ::Rails::Generators::TestCase
     tests OrangeSms::Generators::InstallGenerator
-    destination File.expand_path('../tmp', __dir__)
+    destination File.expand_path('../../tmp', __dir__)
     setup :prepare_destination
 
     test 'generates orange_sms initializer' do
