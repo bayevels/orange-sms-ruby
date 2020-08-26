@@ -1,5 +1,4 @@
 # OrangeSms
-
 > Orange Sms Ruby is a client library that allow you to send sms from a RoR app using the [Orange Sms API](https://developer.orange.com/apis/sms-sn/overview)
 
 ## Disclaimer

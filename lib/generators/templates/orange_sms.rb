@@ -18,7 +18,7 @@ OrangeSms.setup do |config|
   # config.default_receiver_country_code = :sen
 
   # Authorization Header you can find the Authorization header in your app dashboard https://developer.orange.com/myapps
-  config.authorization = 'put your Authorization Header here !' 
+  config.authorization = 'put your Authorization Header here !'
 
   # Generate the access token with the interactive console
   # --> client = OrangeSms::Client.new
