@@ -1,5 +1,9 @@
 require 'simplecov'
 require 'simplecov_small_badge'
+
+SimpleCov.minimum_coverage 75
+SimpleCov.maximum_coverage_drop 25
+
 SimpleCov.start do
   # add your normal SimpleCov configs
   add_filter "/app/model"
@@ -23,4 +27,4 @@ $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 require 'orange_sms'
 
 require 'minitest/autorun'
-require 'webmock/test_unit'
+require 'webmock/minitest'
