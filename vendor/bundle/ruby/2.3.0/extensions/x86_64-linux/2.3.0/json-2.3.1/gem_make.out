@@ -1,0 +1,13 @@
+current directory: /home/travis/build/bayevels/orange-sms-ruby/vendor/bundle/ruby/2.3.0/gems/json-2.3.1/ext/json
+/home/travis/.rvm/rubies/ruby-2.3.0/bin/ruby -I /home/travis/.rvm/rubies/ruby-2.3.0/lib/ruby/site_ruby/2.3.0 -r ./siteconf20200826-6754-ve95h4.rb extconf.rb
+creating Makefile
+
+current directory: /home/travis/build/bayevels/orange-sms-ruby/vendor/bundle/ruby/2.3.0/gems/json-2.3.1/ext/json
+make "DESTDIR=" clean
+
+current directory: /home/travis/build/bayevels/orange-sms-ruby/vendor/bundle/ruby/2.3.0/gems/json-2.3.1/ext/json
+make "DESTDIR="
+make: Nothing to be done for 'all'.
+
+current directory: /home/travis/build/bayevels/orange-sms-ruby/vendor/bundle/ruby/2.3.0/gems/json-2.3.1/ext/json
+make "DESTDIR=" install

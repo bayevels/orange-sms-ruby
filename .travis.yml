@@ -1,0 +1,14 @@
+---
+language: ruby
+cache: bundler
+rvm:
+  - 2.3.0
+before_install: gem install bundler -v 2.1.4
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  verbose: true
+  on:
+    branch: master

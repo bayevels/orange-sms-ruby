@@ -1,0 +1,14 @@
+.rvmrc
+.bundle
+Gemfile.lock
+
+## PROJECT::GENERAL
+rdoc
+pkg
+.sass-cache
+*.gem
+
+## PROJECT::SPECIFIC
+
+vendor
+.byebug_history
