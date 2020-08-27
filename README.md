@@ -10,12 +10,12 @@ The registration process is detailed [here](https://developer.orange.com/apis/sm
 Instead of reading and trying to understand once again how the Orange Sms API work this gem aims to let you quickly send sms from a ruby  app (mainly RoR) using the [Orange Sms API](https://developer.orange.com/apis/sms-sn/overview).
 
 ```ruby
-    # default receiver country is Senegal (:sen)
-    client = OrangeSms::client.new
-    client.send_sms('776879809', 'Simple comme bonjour !')
-    # Or specify the country code when sending
-    client = OrangeSms::client.new(:civ) # Ivory coast code
-    client.send_sms('776879809', 'Simple comme bonjour !')
+# default receiver country is Senegal (:sen)
+client = OrangeSms::client.new
+client.send_sms('776879809', 'Simple comme bonjour !')
+# Or specify the country code when sending
+client = OrangeSms::client.new(:civ) # Ivory coast code
+client.send_sms('776879809', 'Simple comme bonjour !')
 ```
 ## Getting Started
 
@@ -68,33 +68,41 @@ Get the Authorization header from your Orange developer dashboard
 ```ruby
 config.authorization = 'Basic NktSSHljksdj7P...Jjndb6UdnlrT2lOaA==' 
 ```
-You can get your access token using the rails console
+You can get your access token using the rails console. Run in your terminal `rails console` and next
 ```ruby
-    client = OrangeSms::Client.new
-    client.fetch_access_token ==> i6m2iIcY0SodWSe...L3ojAXXrH
+client = OrangeSms::Client.new
+client.fetch_access_token ==> i6m2iIcY0SodWSe...L3ojAXXrH
 ```
 Copy it and paste it into your initializer file, and add it to the initializer file `/config/initializers/orange_sms.rb`
 ```ruby
 config.access_token = 'i6m2iIcY0SodWSe...L3ojAXXrH' # You may use ENV variables
 ```
-The access token will last 7776000 seconds, i.e. 90 days. After this period, you'll get an error and should request another token.
+:warning: The access token will last 7776000 seconds, i.e. 90 days. After this period, you'll get an error and should request another token.
 
+### Test it :sunglasses:
+After adding the access token you can the test the integration in the rails console or your app. 
+For exemple you can open up the console `rails console` and next 
+```ruby
+# default receiver country is Senegal (:sen)
+client = OrangeSms::client.new
+client.send_test_sms # Will send sms to the sender_phone that you have specified inside `/config/initializers/orange_sms.rb`.
+```
 ### Send Sms
 ```ruby
-    # default receiver country is Senegal (:sen)
-    client = OrangeSms::client.new
-    client.send_sms('776879809', 'Simple comme bonjour !')
-    # Or specify the country code when sending
-    client = OrangeSms::client.new(:civ) # Ivory coast code
-    client.send_sms('776879809', 'Simple comme bonjour !')
+# default receiver country is Senegal (:sen)
+client = OrangeSms::client.new
+client.send_sms('776879809', 'Simple comme bonjour !')
+# Or specify the country code when sending
+client = OrangeSms::client.new(:civ) # Ivory coast code
+client.send_sms('776879809', 'Simple comme bonjour !')
 ```
 ### Handling Errors
 ```ruby
-    begin
-      client.send_sms('776879809', 'Simple comme bonjour !')
-    rescue OrangeSms::Error::ApiError => e
-      puts e.message
-    end
+begin
+  client.send_sms('776879809', 'Simple comme bonjour !')
+rescue OrangeSms::Error::ApiError => e
+  puts e.message
+end
 ```
 ## Development
 
