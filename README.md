@@ -1,4 +1,6 @@
 # OrangeSms
+![Build Status](https://travis-ci.com/bayevels/orange-sms-ruby.svg?branch=master)
+[![Coverage](https://bayevels.github.io/orange-sms-ruby/badges/coverage_badge_total.svg)](https://bayevels.github.io/orange-sms-ruby/coverage/index.html)
 > Orange Sms Ruby is a client library that allow you to send sms from a RoR app using the [Orange Sms API](https://developer.orange.com/apis/sms-sn/overview)
 
 ## Disclaimer
