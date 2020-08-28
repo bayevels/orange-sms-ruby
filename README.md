@@ -4,7 +4,7 @@
 > Orange Sms Ruby is a client library that allow you to send sms from a RoR app using the [Orange Sms API](https://developer.orange.com/apis/sms-sn/overview)
 
 ## Disclaimer
-This gem is not an official client of Orange, in order to use the client you need to create a [Orange Sms API](https://developer.orange.com/apis/sms-sn/overview) and to register a app in the developer dashboard that orange provide to you. After registering your app you can ask for sms integration approval (this process can take time :)).
+This gem is not an official client of Orange, in order to use the client you need to create a [Orange Sms API](https://developer.orange.com/apis/sms-sn/overview) and to register an app in the developer dashboard that orange provide to you. After registering your app you can ask for sms integration approval (this process can take time :)).
 The registration process is detailed [here](https://developer.orange.com/apis/sms-sn/overview)
 ## Motivation
 Instead of reading and trying to understand once again how the Orange Sms API work this gem aims to let you quickly send sms from a ruby  app (mainly RoR) using the [Orange Sms API](https://developer.orange.com/apis/sms-sn/overview).
@@ -64,11 +64,11 @@ OrangeSms.setup do |config|
 end
 ```
 ### Generate Access token
-Get the Authorization header from your Orange developer dashboard
+in order to fetch the access token you need first to get the Authorization header from your Orange developer dashboard and to add it to your configuration file
 ```ruby
 config.authorization = 'Basic NktSSHljksdj7P...Jjndb6UdnlrT2lOaA==' 
 ```
-You can get your access token using the rails console. Run in your terminal `rails console` and next
+You can now get your access token using the rails console. Run in your terminal `rails console` and next
 ```ruby
 client = OrangeSms::Client.new
 client.fetch_access_token ==> i6m2iIcY0SodWSe...L3ojAXXrH
@@ -80,8 +80,7 @@ config.access_token = 'i6m2iIcY0SodWSe...L3ojAXXrH' # You may use ENV variables
 :warning: The access token will last 7776000 seconds, i.e. 90 days. After this period, you'll get an error and should request another token.
 
 ### Test it :sunglasses:
-After adding the access token you can the test the integration in the rails console or your app. 
-For exemple you can open up the console `rails console` and next 
+you can test the integration in the rails console, open up the console `rails console` or run reload it if it's already open by typing `reload!` and it enter, next run the code down below
 ```ruby
 # default receiver country is Senegal (:sen)
 client = OrangeSms::client.new
