@@ -80,7 +80,7 @@ config.access_token = 'i6m2iIcY0SodWSe...L3ojAXXrH' # You may use ENV variables
 :warning: The access token will last 7776000 seconds, i.e. 90 days. After this period, you'll get an error and should request another token.
 
 ### Test it :sunglasses:
-you can test the integration in the rails console, open up the console `rails console` or run reload it if it's already open by typing `reload!` and it enter, next run the code down below
+you can test the integration in the rails console, open up the console `rails console` or reload it if it's already open by typing `reload!` and it enter, next run the code down below
 ```ruby
 # default receiver country is Senegal (:sen)
 client = OrangeSms::client.new
