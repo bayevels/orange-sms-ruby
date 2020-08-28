@@ -25,14 +25,15 @@ class ClientTest < Minitest::Test
     assert_equal('i6m2iIcY0SodWSe...L3ojAXXrH', client.fetch_access_token)
   end
 
-  def test_that_fetch_access_token_is_failing
+  def test_that_fetch_access_token_is_raising_authentication_error
     stub_request(:post, 'https://api.orange.com/oauth/v2/token')
       .to_return(body: '{
         "error": "invalid_client",
         "error_description": "The requested service needs credentials,..."
         }', status: 404, headers: { 'Content-Type': 'application/json' })
     client = OrangeSms::Client.new
-    assert_raises(OrangeSms::Error::AuthenticationError) { client.fetch_access_token }
+    error = assert_raises(OrangeSms::Error::AuthenticationError) { client.fetch_access_token }
+    assert_match(/[HTTP 404]/, error.to_s)
   end
 
   def test_that_send_sms_is_passing
@@ -42,7 +43,7 @@ class ClientTest < Minitest::Test
     assert_nil(client.send_sms('786789098', 'test message'))
   end
 
-  def test_that_send_sms_is_failing
+  def test_that_send_sms_is_raising_api_error
     stub_request(:post, "https://api.orange.com/smsmessaging/v1/outbound/tel%3A%2B#{OrangeSms.sender_phone}/requests")
       .to_return(body: '{
         "code": 42,
@@ -50,6 +51,14 @@ class ClientTest < Minitest::Test
         "description": "The requested service needs credentials, and the ones provided were out-of-date."
       }', status: 401)
     client = OrangeSms::Client.new
-    assert_raises(OrangeSms::Error::ApiError) { client.send_sms('786789098', 'test message') }
+    error = assert_raises(OrangeSms::Error::ApiError) { client.send_sms('786789098', 'test message') }
+    assert_match(/[HTTP 401]/, error.to_s)
+  end
+
+  def test_that_send_test_sms_is_passing
+    stub_request(:post, "https://api.orange.com/smsmessaging/v1/outbound/tel%3A%2B#{OrangeSms.sender_phone}/requests")
+      .to_return(status: 201)
+    client = OrangeSms::Client.new
+    assert_nil(client.send_test_sms)
   end
 end
