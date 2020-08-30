@@ -11,10 +11,10 @@ Instead of reading and trying to understand once again how the Orange Sms API wo
 
 ```ruby
 # default receiver country is Senegal (:sen)
-client = OrangeSms::client.new
+client = OrangeSms::Client.new
 client.send_sms('776879809', 'Simple comme bonjour !')
 # Or specify the country code when sending
-client = OrangeSms::client.new(:civ) # Ivory coast code
+client = OrangeSms::Client.new(:civ) # Ivory coast code
 client.send_sms('776879809', 'Simple comme bonjour !')
 ```
 ## Getting Started
@@ -77,24 +77,25 @@ config.access_token = 'i6m2iIcY0SodWSe...L3ojAXXrH' # You may use ENV variables
 :warning: The access token will last 7776000 seconds, i.e. 90 days. After this period, you'll get an error and should request another token.
 
 ### Test it :sunglasses:
-you can test the integration in the rails console, open up the console `rails console` or reload it if it's already open by typing `reload!` and it enter, next run the code down below
+you can test the integration in the rails console, open up the console `rails console` next run the code down below
 ```ruby
 # default receiver country is Senegal (:sen)
-client = OrangeSms::client.new
+client = OrangeSms::Client.new
 client.send_test_sms # Will send sms to the sender_phone that you have specified inside `/config/initializers/orange_sms.rb`.
 ```
 ### Send Sms
 ```ruby
 # default receiver country is Senegal (:sen)
-client = OrangeSms::client.new
+client = OrangeSms::Client.new
 client.send_sms('776879809', 'Simple comme bonjour !')
 # Or specify the country code when sending
-client = OrangeSms::client.new(:civ) # Ivory coast code
+client = OrangeSms::Client.new(:civ) # Ivory coast code
 client.send_sms('776879809', 'Simple comme bonjour !')
 ```
 ### Handling Errors
 ```ruby
 begin
+  client = OrangeSms::Client.new
   client.send_sms('776879809', 'Simple comme bonjour !')
 rescue OrangeSms::Error::ApiError => e
   puts e.message

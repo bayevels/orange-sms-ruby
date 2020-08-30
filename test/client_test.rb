@@ -4,6 +4,7 @@ require 'test_helper'
 
 class ClientTest < Minitest::Test
   include WebMock::API
+  attr_reader :sender_phone
 
   def setup
     OrangeSms.setup do |config|
@@ -12,6 +13,7 @@ class ClientTest < Minitest::Test
       config.authorization = 'Basic NktSSHljksdj7P...Jjndb6UdnlrT2lOaA=='
       config.access_token = 'i6m2iIcY0SodWSe...L3ojAXXrH'
     end
+    @sender_phone = 'tel:+221778909878'
   end
 
   def test_that_fetch_access_token_is_passing
@@ -37,14 +39,14 @@ class ClientTest < Minitest::Test
   end
 
   def test_that_send_sms_is_passing
-    stub_request(:post, "https://api.orange.com/smsmessaging/v1/outbound/tel%3A%2B#{OrangeSms.sender_phone}/requests")
+    stub_request(:post, "https://api.orange.com/smsmessaging/v1/outbound/#{sender_phone}/requests")
       .to_return(status: 201)
     client = OrangeSms::Client.new
     assert_nil(client.send_sms('786789098', 'test message'))
   end
 
   def test_that_send_sms_is_raising_api_error
-    stub_request(:post, "https://api.orange.com/smsmessaging/v1/outbound/tel%3A%2B#{OrangeSms.sender_phone}/requests")
+    stub_request(:post, "https://api.orange.com/smsmessaging/v1/outbound/#{sender_phone}/requests")
       .to_return(body: '{
         "code": 42,
         "message": "Expired credentials",
@@ -56,7 +58,7 @@ class ClientTest < Minitest::Test
   end
 
   def test_that_send_test_sms_is_passing
-    stub_request(:post, "https://api.orange.com/smsmessaging/v1/outbound/tel%3A%2B#{OrangeSms.sender_phone}/requests")
+    stub_request(:post, "https://api.orange.com/smsmessaging/v1/outbound/#{sender_phone}/requests")
       .to_return(status: 201)
     client = OrangeSms::Client.new
     assert_nil(client.send_test_sms)

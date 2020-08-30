@@ -45,7 +45,7 @@ module OrangeSms
 
     # Ask Orange backend to send Sms to some number
     def send_sms(receiver_phone, message)
-      response = send_request("/smsmessaging/v1/outbound/tel%3A%2B#{OrangeSms.sender_phone}/requests",
+      response = send_request("/smsmessaging/v1/outbound/#{sender_phone}/requests",
                               build_sms_payload(receiver_phone, message),
                               "Bearer #{OrangeSms.access_token}", 'application/json')
       raise OrangeSms::Error::ApiError.new('Unable to Send message', response) if response.status != 201
