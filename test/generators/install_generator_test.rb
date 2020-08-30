@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'test_helper'
-require 'generators/install_generator'
 
 class InstallGeneratorTest < ::Rails::Generators::TestCase
   tests OrangeSms::Generators::InstallGenerator

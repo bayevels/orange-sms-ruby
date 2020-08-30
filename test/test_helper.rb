@@ -6,7 +6,7 @@ SimpleCov.maximum_coverage_drop 25
 
 SimpleCov.start do
   # add your normal SimpleCov configs
-  add_filter "/app/model"
+  add_filter '/app/model'
   # call SimpleCov::Formatter::BadgeFormatter after the normal HTMLFormatter
   SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
     SimpleCov::Formatter::HTMLFormatter,
@@ -28,3 +28,5 @@ require 'orange_sms'
 
 require 'minitest/autorun'
 require 'webmock/minitest'
+require 'rails/generators/test_case'
+require 'generators/orange_sms/install_generator'
