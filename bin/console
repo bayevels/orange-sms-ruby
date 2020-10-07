@@ -2,13 +2,26 @@
 
 require "bundler/setup"
 require "orange_sms"
+require 'dotenv/load'
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
 # (If you use this, don't forget to add pry to your Gemfile!)
-# require "pry"
-# Pry.start
+# require "irb"
+# IRB.start(__FILE__)
 
-require "irb"
-IRB.start(__FILE__)
+require "pry"
+Pry.hooks.add_hook(:before_session, "Setup OrangeSms Config") do |output, binding, pry|
+  OrangeSms.setup do |config|
+    config.sender_name = ENV['SENDER_NAME']
+    config.sender_phone = ENV['SENDER_PHONE']
+    config.sender_country_code = :sen
+    config.default_receiver_country_code = :sen
+    config.authorization = ENV['AUTHORIZATION']
+    config.access_token = ENV['ACCESS_TOKEN']
+  end
+  output.puts("OrangeSms Config successfuly loaded")
+end
+
+Pry.start

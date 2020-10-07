@@ -29,4 +29,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov-small-badge'
   spec.add_development_dependency 'sprockets', '3.7.2'
   spec.add_development_dependency 'webmock'
+  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'guard'
+  spec.add_development_dependency 'guard-minitest'
+  spec.add_development_dependency 'dotenv-rails'
 end
