@@ -21,6 +21,10 @@ module OrangeSms
     }.freeze
 
     def initialize(country_code = nil)
+      raise(ArgumentError, invalid_country_code_message('country_code')) unless !country_code.nil? && country_code_supported?(country_code)
+      raise(ArgumentError, invalid_country_code_message('default_receiver_country_code')) unless country_code_supported?(OrangeSms.default_receiver_country_code)
+      raise(ArgumentError, invalid_country_code_message('sender_country_code')) unless country_code_supported?(OrangeSms.sender_country_code)
+
       @country_code = country_code.nil? ? OrangeSms.default_receiver_country_code : country_code
       @country = SUPPORTED_COUNTRIES[@country_code]
       @sender_country = SUPPORTED_COUNTRIES[OrangeSms.sender_country_code]
@@ -29,7 +33,7 @@ module OrangeSms
 
     # Fetch the access token directly from your code
     def fetch_access_token
-      response = send_request('/oauth/v2/token',
+      response = send_request('/oauth/v3/token',
                               'grant_type=client_credentials',
                               OrangeSms.authorization,
                               'application/x-www-form-urlencoded')
@@ -47,7 +51,7 @@ module OrangeSms
     def send_sms(receiver_phone, message)
       response = send_request("/smsmessaging/v1/outbound/#{sender_phone}/requests",
                               build_sms_payload(receiver_phone, message),
-                              "Bearer #{OrangeSms.access_token}", 'application/json')
+                              "Bearer #{fetch_access_token}", 'application/json')
       raise OrangeSms::Error::ApiError.new('Unable to Send message', response) if response.status != 201
     end
 
@@ -72,6 +76,18 @@ module OrangeSms
           }
         }
       }.to_json
+    end
+
+    # Return True if the given country code exists false if not
+    def country_code_supported?(country_code_arg)
+      SUPPORTED_COUNTRIES.keys.include?(country_code_arg.to_sym)
+    end
+
+    # Message to return when the give code is not supported bbby the library
+    def invalid_country_code_message(code)
+      %( Invalid #{code},
+         the #{code} value should follow ISO-3166 alpha 3 country codes specs,
+         For more details on supported countries for Orange Api see https://developer.orange.com/apis/sms-sn/getting-started )
     end
   end
 end
