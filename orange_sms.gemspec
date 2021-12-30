@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = 'ruby client that allows to send sms via the orange api'
   spec.homepage      = 'https://github.com/bayevels/orange-sms-ruby'
   spec.license       = 'MIT'
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.3.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.5.0')
 
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
 
   # Development dependencies
   spec.add_development_dependency 'minitest', '~> 5.0'
-  spec.add_development_dependency 'rails', '~> 5.2.0'
+  spec.add_development_dependency 'rails', '~> 6.1.4'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'simplecov-small-badge'
   spec.add_development_dependency 'sprockets', '3.7.2'
