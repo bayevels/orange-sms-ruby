@@ -14,21 +14,21 @@ class ClientTest < Minitest::Test
       config.access_token = 'i6m2iIcY0SodWSe...L3ojAXXrH'
     end
     @sender_phone = 'tel:+221778909878'
+    stub_request(:post, 'https://api.orange.com/oauth/v3/token')
+      .to_return(body: '{
+      "token_type": "Bearer",
+      "access_token": "i6m2iIcY0SodWSe...L3ojAXXrH",
+      "expires_in": "7776000"
+    }', status: 200, headers: { 'Content-Type': 'application/json' })
   end
 
   def test_that_fetch_access_token_is_passing
-    stub_request(:post, 'https://api.orange.com/oauth/v2/token')
-      .to_return(body: '{
-        "token_type": "Bearer",
-        "access_token": "i6m2iIcY0SodWSe...L3ojAXXrH",
-        "expires_in": "7776000"
-      }', status: 200, headers: { 'Content-Type': 'application/json' })
     client = OrangeSms::Client.new
     assert_equal('i6m2iIcY0SodWSe...L3ojAXXrH', client.fetch_access_token)
   end
 
   def test_that_fetch_access_token_is_raising_authentication_error
-    stub_request(:post, 'https://api.orange.com/oauth/v2/token')
+    stub_request(:post, 'https://api.orange.com/oauth/v3/token')
       .to_return(body: '{
         "error": "invalid_client",
         "error_description": "The requested service needs credentials,..."

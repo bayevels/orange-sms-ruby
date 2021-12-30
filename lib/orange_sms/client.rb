@@ -29,7 +29,7 @@ module OrangeSms
 
     # Fetch the access token directly from your code
     def fetch_access_token
-      response = send_request('/oauth/v2/token',
+      response = send_request('/oauth/v3/token',
                               'grant_type=client_credentials',
                               OrangeSms.authorization,
                               'application/x-www-form-urlencoded')
@@ -47,7 +47,7 @@ module OrangeSms
     def send_sms(receiver_phone, message)
       response = send_request("/smsmessaging/v1/outbound/#{sender_phone}/requests",
                               build_sms_payload(receiver_phone, message),
-                              "Bearer #{OrangeSms.access_token}", 'application/json')
+                              "Bearer #{fetch_access_token}", 'application/json')
       raise OrangeSms::Error::ApiError.new('Unable to Send message', response) if response.status != 201
     end
 
